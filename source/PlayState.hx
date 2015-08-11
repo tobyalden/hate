@@ -34,7 +34,7 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		trace(FlxG.collide(_player, level));
+		FlxG.collide(_player, level);
 	}
 
 	override public function destroy():Void
