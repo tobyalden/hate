@@ -39,7 +39,7 @@ class Player extends FlxSprite
     else if(_left) {
       animation.play("run");
       facing = FlxObject.LEFT;
-      velocity.x = speed;
+      velocity.x = -speed;
     }
     else if(_right) {
       animation.play("run");
