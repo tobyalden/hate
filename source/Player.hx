@@ -18,12 +18,13 @@ class Player extends FlxSprite
     animation.add("run", [1, 2, 3], 6, false);
     animation.add("idle", [0], 6, false);
     drag.x = drag.y = 1600;
+    setSize(16, 24);
   }
 
   override public function update():Void
   {
-      movement();
       super.update();
+      movement();
   }
 
   private function movement():Void
@@ -38,12 +39,12 @@ class Player extends FlxSprite
     else if(_left) {
       animation.play("run");
       facing = FlxObject.LEFT;
-      x -= speed * FlxG.elapsed;
+      velocity.x = speed;
     }
     else if(_right) {
       animation.play("run");
       facing = FlxObject.RIGHT;
-      x += speed * FlxG.elapsed;
+      velocity.x = speed;
     }
     else {
       animation.play("idle");
