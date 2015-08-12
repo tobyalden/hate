@@ -130,7 +130,7 @@ class ApplicationMain {
 			(false ? flash.Lib.FULLSCREEN : 0) |
 			(0 == 4 ? flash.Lib.HW_AA_HIRES : 0) |
 			(0 == 2 ? flash.Lib.HW_AA : 0),
-			"FlixelTut",
+			"Hate",
 			null
 			#if mobile, ScaledStage #end
 		);
@@ -314,7 +314,7 @@ class ApplicationMain {
 		wx.App.boot (function () {
 			
 			
-			frame = wx.Frame.create (null, null, "FlixelTut", null, { width: 640, height: 480 });
+			frame = wx.Frame.create (null, null, "Hate", null, { width: 640, height: 480 });
 			
 			
 			#if openfl
@@ -499,7 +499,7 @@ class ApplicationMain {
 			packageName: "com.example.myapp",
 			resizable: true,
 			stencilBuffer: false,
-			title: "FlixelTut",
+			title: "Hate",
 			version: "0.0.1",
 			vsync: true,
 			width: Std.int (640),

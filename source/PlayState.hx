@@ -26,10 +26,13 @@ class PlayState extends FlxState
     var mapData:String = Assets.getText("assets/data/map.csv");
     var mapTilePath:String = "assets/images/tiles.png";
     level.loadMap(mapData, mapTilePath, 16, 16);
+    level.setTileProperties(1, FlxObject.NONE);
     add(level);
 
 		player = new Player(60, 200);
 		add(player);
+
+    /*FlxG.sound.playMusic("assets/music/nature.ogg", 1, true);*/
 
 		super.create();
 	}
