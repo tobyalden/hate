@@ -7,11 +7,13 @@ import flixel.util.FlxColor;
 
 class Player extends FlxSprite
 {
-  public var gravity:Float = 0.00067 * 1000000;
-  public var terminal_velocity:Float = 0.28 * 1000;
-  public var run_velocity:Float = 0.17 * 1000;
-  public var jump_velocity:Float = 0.29 * 1000;
-  public var jump_cancel_velocity:Float = 0.08 * 1000;
+  private var gravity:Float = 0.00067 * 1000 * 1000;
+  private var terminal_velocity:Float = 0.28 * 1000;
+  private var run_velocity:Float = 0.17 * 1000;
+  private var jump_velocity:Float = 0.29 * 1000;
+  private var jump_cancel_velocity:Float = 0.08 * 1000;
+
+  private var jump_key_prev:Bool;
 
   public function new(X:Float=0, Y:Float=0)
   {
@@ -22,44 +24,52 @@ class Player extends FlxSprite
     animation.add("run", [1, 2, 3], 10, false);
     animation.add("idle", [0], 10, false);
     animation.add("jump", [4], 10, false);
-    drag.x = drag.y = 1600;
     setSize(10, 24);
     offset.set(3, 0);
-    /*maxVelocity.y = terminal_velocity;*/
+    jump_key_prev = false;
   }
 
   override public function update():Void
   {
-      movement();
-      super.update();
+    movement();
+    super.update();
   }
 
   private function movement():Void
   {
-    var _left:Bool = false;
-    var _right:Bool = false;
-    var _jump:Bool = false;
-    _left = FlxG.keys.anyPressed(["LEFT"]);
-    _right = FlxG.keys.anyPressed(["RIGHT"]);
-    _jump = FlxG.keys.justPressed.SPACE;
+    var delta = FlxG.elapsed * 1000;
+    var left_key:Bool = FlxG.keys.anyPressed(["LEFT"]);
+    var right_key:Bool = FlxG.keys.anyPressed(["RIGHT"]);
+    var jump_key:Bool = FlxG.keys.anyPressed(["SPACE", "Z"]);
+    var jump_key_just:Bool = FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.Z;
 
     var in_air:Bool = true;
     if(velocity.y == 0) {
       in_air = false;
     }
 
-    if(_jump && !in_air) {
+    if(jump_key_just && !in_air) {
     	velocity.y = -jump_velocity;
     }
-
-    if (_left && _right) {
-      _left = _right = false;
+    else if(jump_key_prev && !jump_key) {
+      if (velocity.y < -jump_cancel_velocity)
+			{
+				velocity.y = -jump_cancel_velocity;
+			}
     }
-    else if(_left) {
+
+    if(velocity.y > terminal_velocity) {
+      velocity.y = terminal_velocity;
+    }
+
+    if (left_key && right_key) {
+      left_key = right_key = false;
+    }
+    else if(left_key) {
       facing = FlxObject.LEFT;
       velocity.x = -run_velocity;
     }
-    else if(_right) {
+    else if(right_key) {
       facing = FlxObject.RIGHT;
       velocity.x = run_velocity;
     }
@@ -78,6 +88,8 @@ class Player extends FlxSprite
     else {
       animation.play("idle");
     }
+
+    jump_key_prev = jump_key;
   }
 
 }

@@ -14,7 +14,7 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 class PlayState extends FlxState
 {
 
-	private var _player:Player;
+	private var player:Player;
   private var level:FlxTilemap;
 
 	override public function create():Void
@@ -25,8 +25,8 @@ class PlayState extends FlxState
     level.loadMap(mapData, mapTilePath, 16, 16);
     add(level);
 
-		_player = new Player(20, 20);
-		add(_player);
+		player = new Player(60, 200);
+		add(player);
 
 		super.create();
 	}
@@ -34,7 +34,7 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		FlxG.collide(_player, level);
+		FlxG.collide(player, level);
 	}
 
 	override public function destroy():Void
