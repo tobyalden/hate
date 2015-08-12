@@ -3,10 +3,19 @@ package;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.system.FlxSound;
 import flixel.util.FlxColor;
+import openfl.Assets;
 
 class Player extends FlxSprite
 {
+
+  public var land_sfx:FlxSound;
+  private var run_sfx:FlxSound;
+  private var jump_sfx:FlxSound;
+  private var flip_sfx:FlxSound;
+  private var cant_flip_sfx:FlxSound;
+
   private var gravity:Float = 0.00067 * 1000 * 1000;
   private var terminal_velocity:Float = 0.28 * 1000;
   private var run_velocity:Float = 0.17 * 1000;
@@ -25,9 +34,16 @@ class Player extends FlxSprite
     loadGraphic(AssetPaths.player__png, true, 16, 24);
     setFacingFlip(FlxObject.LEFT, true, false);
     setFacingFlip(FlxObject.RIGHT, false, false);
-    animation.add("run", [1, 2, 3], 10, false);
+    animation.add("run", [1, 2, 3, 2], 10, false);
     animation.add("idle", [0], 10, false);
     animation.add("jump", [4], 10, false);
+
+    run_sfx = FlxG.sound.load("assets/sounds/run1.wav");
+    jump_sfx = FlxG.sound.load("assets/sounds/jump.wav");
+    land_sfx = FlxG.sound.load("assets/sounds/drop3.wav");
+    flip_sfx = FlxG.sound.load("assets/sounds/whoosh.wav");
+    cant_flip_sfx = FlxG.sound.load("assets/sounds/no.wav");
+
     setSize(10, 24);
     offset.set(3, 0);
     jump_key_prev = false;
@@ -65,6 +81,7 @@ class Player extends FlxSprite
       else {
       	velocity.y = -jump_velocity;
       }
+      jump_sfx.play();
     }
     else if(jump_key_prev && !jump_key) {
       if(is_flipped && velocity.y > jump_cancel_velocity) {
@@ -80,6 +97,10 @@ class Player extends FlxSprite
       if(can_flip) {
         is_flipped = !is_flipped;
         can_flip = false;
+        flip_sfx.play();
+      }
+      else {
+        cant_flip_sfx.play();
       }
     }
 
@@ -114,12 +135,15 @@ class Player extends FlxSprite
 
     if(in_air) {
       animation.play("jump");
+      run_sfx.stop();
     }
     else if(velocity.x != 0) {
       animation.play("run");
+      run_sfx.play();
     }
     else {
       animation.play("idle");
+      run_sfx.stop();
     }
 
     if(is_flipped) {

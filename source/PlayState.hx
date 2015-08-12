@@ -20,6 +20,8 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
+    FlxG.mouse.visible = false;
+
 		level = new FlxTilemap();
     var mapData:String = Assets.getText("assets/data/map.csv");
     var mapTilePath:String = "assets/images/tiles.png";
@@ -35,19 +37,26 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		if(FlxG.collide(player, level))
+		collidePlayer();
+	}
+
+	private function collidePlayer():Void
+	{
+		if(FlxG.collide(player, level) && player.in_air)
 		{
 			var save_y = player.y;
 			if(player.is_flipped) {
 				player.y = player.y - 1;
 				if(FlxG.collide(player, level)) {
 					player.in_air = false;
+          player.land_sfx.play();
 				}
 			}
 			else {
 				player.y = player.y + 1;
 				if(FlxG.collide(player, level)) {
 					player.in_air = false;
+          player.land_sfx.play();
 				}
 			}
 			player.y = save_y;

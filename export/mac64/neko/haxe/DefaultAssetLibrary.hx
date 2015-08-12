@@ -64,6 +64,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Font.registerFont (__ASSET__assets_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__assets_fonts_arial_ttf);
 		
@@ -71,6 +86,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -571,10 +601,40 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/player.png", AssetType.IMAGE);
 		path.set ("assets/images/tiles.png", "assets/images/tiles.png");
 		type.set ("assets/images/tiles.png", AssetType.IMAGE);
-		path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
-		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
-		path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");
-		type.set ("assets/sounds/sounds-go-here.txt", AssetType.TEXT);
+		path.set ("assets/sounds/beat.wav", "assets/sounds/beat.wav");
+		type.set ("assets/sounds/beat.wav", AssetType.SOUND);
+		path.set ("assets/sounds/delicate.wav", "assets/sounds/delicate.wav");
+		type.set ("assets/sounds/delicate.wav", AssetType.SOUND);
+		path.set ("assets/sounds/drop3.wav", "assets/sounds/drop3.wav");
+		type.set ("assets/sounds/drop3.wav", AssetType.SOUND);
+		path.set ("assets/sounds/flash.wav", "assets/sounds/flash.wav");
+		type.set ("assets/sounds/flash.wav", AssetType.SOUND);
+		path.set ("assets/sounds/grassdrop.wav", "assets/sounds/grassdrop.wav");
+		type.set ("assets/sounds/grassdrop.wav", AssetType.SOUND);
+		path.set ("assets/sounds/grassjump.wav", "assets/sounds/grassjump.wav");
+		type.set ("assets/sounds/grassjump.wav", AssetType.SOUND);
+		path.set ("assets/sounds/grassrun.wav", "assets/sounds/grassrun.wav");
+		type.set ("assets/sounds/grassrun.wav", AssetType.SOUND);
+		path.set ("assets/sounds/jump.wav", "assets/sounds/jump.wav");
+		type.set ("assets/sounds/jump.wav", AssetType.SOUND);
+		path.set ("assets/sounds/laser.wav", "assets/sounds/laser.wav");
+		type.set ("assets/sounds/laser.wav", AssetType.SOUND);
+		path.set ("assets/sounds/next.wav", "assets/sounds/next.wav");
+		type.set ("assets/sounds/next.wav", AssetType.SOUND);
+		path.set ("assets/sounds/no.wav", "assets/sounds/no.wav");
+		type.set ("assets/sounds/no.wav", AssetType.SOUND);
+		path.set ("assets/sounds/pickup.wav", "assets/sounds/pickup.wav");
+		type.set ("assets/sounds/pickup.wav", AssetType.SOUND);
+		path.set ("assets/sounds/run1.wav", "assets/sounds/run1.wav");
+		type.set ("assets/sounds/run1.wav", AssetType.SOUND);
+		path.set ("assets/sounds/shift.wav", "assets/sounds/shift.wav");
+		type.set ("assets/sounds/shift.wav", AssetType.SOUND);
+		path.set ("assets/sounds/switch_off.wav", "assets/sounds/switch_off.wav");
+		type.set ("assets/sounds/switch_off.wav", AssetType.SOUND);
+		path.set ("assets/sounds/switch_on.wav", "assets/sounds/switch_on.wav");
+		type.set ("assets/sounds/switch_on.wav", AssetType.SOUND);
+		path.set ("assets/sounds/whoosh.wav", "assets/sounds/whoosh.wav");
+		type.set ("assets/sounds/whoosh.wav", AssetType.SOUND);
 		path.set ("assets/sounds/beep.ogg", "assets/sounds/beep.ogg");
 		type.set ("assets/sounds/beep.ogg", AssetType.SOUND);
 		path.set ("assets/sounds/flixel.ogg", "assets/sounds/flixel.ogg");
@@ -600,12 +660,57 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/tiles.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
-		id = "assets/music/music-goes-here.txt";
+		id = "assets/sounds/beat.wav";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/sounds/sounds-go-here.txt";
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/delicate.wav";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/drop3.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/flash.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/grassdrop.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/grassjump.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/grassrun.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/jump.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/laser.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/next.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/no.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/pickup.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/run1.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/shift.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/switch_off.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/switch_on.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/sounds/whoosh.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
 		id = "assets/sounds/beep.ogg";
 		path.set (id, id);
 		type.set (id, AssetType.SOUND);
@@ -641,6 +746,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__assets_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__assets_fonts_arial_ttf);
 		
@@ -649,6 +769,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1366,11 +1501,41 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @:keep @:bind #if display private #end class __ASSET__assets_fonts_nokiafc22_ttf extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_fonts_arial_ttf extends null { }
 
 
 #elseif html5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
