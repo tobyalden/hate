@@ -13,7 +13,11 @@ class Player extends FlxSprite
   private var jump_velocity:Float = 0.29 * 1000;
   private var jump_cancel_velocity:Float = 0.08 * 1000;
 
+  public var in_air:Bool;
+  public var is_flipped:Bool;
+
   private var jump_key_prev:Bool;
+  private var can_flip:Bool;
 
   public function new(X:Float=0, Y:Float=0)
   {
@@ -27,6 +31,8 @@ class Player extends FlxSprite
     setSize(10, 24);
     offset.set(3, 0);
     jump_key_prev = false;
+    can_flip = true;
+    in_air = true;
   }
 
   override public function update():Void
@@ -42,24 +48,46 @@ class Player extends FlxSprite
     var right_key:Bool = FlxG.keys.anyPressed(["RIGHT"]);
     var jump_key:Bool = FlxG.keys.anyPressed(["SPACE", "Z"]);
     var jump_key_just:Bool = FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.Z;
+    var flip_key_just:Bool = FlxG.keys.justPressed.X;
 
-    var in_air:Bool = true;
-    if(velocity.y == 0) {
-      in_air = false;
+    if(velocity.y != 0) {
+      in_air = true;
+    }
+
+    if(!in_air) {
+      can_flip = true;
     }
 
     if(jump_key_just && !in_air) {
-    	velocity.y = -jump_velocity;
+      if(is_flipped) {
+        velocity.y = jump_velocity;
+      }
+      else {
+      	velocity.y = -jump_velocity;
+      }
     }
     else if(jump_key_prev && !jump_key) {
-      if (velocity.y < -jump_cancel_velocity)
+      if(is_flipped && velocity.y > jump_cancel_velocity) {
+        velocity.y = jump_cancel_velocity;
+      }
+      else if (!is_flipped && velocity.y < -jump_cancel_velocity)
 			{
 				velocity.y = -jump_cancel_velocity;
 			}
     }
 
-    if(velocity.y > terminal_velocity) {
+    if(flip_key_just) {
+      if(can_flip) {
+        is_flipped = !is_flipped;
+        can_flip = false;
+      }
+    }
+
+    if(!is_flipped && velocity.y > terminal_velocity) {
       velocity.y = terminal_velocity;
+    }
+    else if(is_flipped && velocity.y < -terminal_velocity) {
+      velocity.y = -terminal_velocity;
     }
 
     if (left_key && right_key) {
@@ -77,7 +105,12 @@ class Player extends FlxSprite
       velocity.x = 0;
     }
 
-    acceleration.y = gravity;
+    if(is_flipped) {
+      acceleration.y = -gravity;
+    }
+    else {
+      acceleration.y = gravity;
+    }
 
     if(in_air) {
       animation.play("jump");
@@ -87,6 +120,13 @@ class Player extends FlxSprite
     }
     else {
       animation.play("idle");
+    }
+
+    if(is_flipped) {
+      flipY = true;
+    }
+    else {
+      flipY = false;
     }
 
     jump_key_prev = jump_key;

@@ -14,8 +14,9 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 class PlayState extends FlxState
 {
 
+  public static var level:FlxTilemap;
+
 	private var player:Player;
-  private var level:FlxTilemap;
 
 	override public function create():Void
 	{
@@ -34,7 +35,23 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		FlxG.collide(player, level);
+		if(FlxG.collide(player, level))
+		{
+			var save_y = player.y;
+			if(player.is_flipped) {
+				player.y = player.y - 1;
+				if(FlxG.collide(player, level)) {
+					player.in_air = false;
+				}
+			}
+			else {
+				player.y = player.y + 1;
+				if(FlxG.collide(player, level)) {
+					player.in_air = false;
+				}
+			}
+			player.y = save_y;
+		}
 	}
 
 	override public function destroy():Void
