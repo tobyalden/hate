@@ -59,11 +59,11 @@ class Player extends FlxSprite
   private function movement():Void
   {
     var delta = FlxG.elapsed * 1000;
-    var left_key:Bool = FlxG.keys.anyPressed(["LEFT"]);
-    var right_key:Bool = FlxG.keys.anyPressed(["RIGHT"]);
-    var jump_key:Bool = FlxG.keys.anyPressed(["SPACE", "Z"]);
-    var jump_key_just:Bool = FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.Z;
-    var flip_key_just:Bool = FlxG.keys.justPressed.X;
+    var leftKey:Bool = FlxG.keys.anyPressed(["LEFT"]);
+    var rightKey:Bool = FlxG.keys.anyPressed(["RIGHT"]);
+    var jumpKey:Bool = FlxG.keys.anyPressed(["SPACE", "Z"]);
+    var jumpKeyJust:Bool = FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.Z;
+    var flipKeyJust:Bool = FlxG.keys.justPressed.X;
 
     if(velocity.y != 0) {
       inAir = true;
@@ -73,7 +73,7 @@ class Player extends FlxSprite
       canFlip = true;
     }
 
-    if(jump_key_just && !inAir) {
+    if(jumpKeyJust && !inAir) {
       if(isFlipped) {
         velocity.y = jumpVelocity;
       }
@@ -82,7 +82,7 @@ class Player extends FlxSprite
       }
       jumpSfx.play();
     }
-    else if(jumpKeyPrev && !jump_key) {
+    else if(jumpKeyPrev && !jumpKey) {
       if(isFlipped && velocity.y > jumpCancelVelocity) {
         velocity.y = jumpCancelVelocity;
       }
@@ -92,7 +92,7 @@ class Player extends FlxSprite
 			}
     }
 
-    if(flip_key_just) {
+    if(flipKeyJust) {
       if(canFlip) {
         isFlipped = !isFlipped;
         canFlip = false;
@@ -110,14 +110,14 @@ class Player extends FlxSprite
       velocity.y = -terminalVelocity;
     }
 
-    if (left_key && right_key) {
-      left_key = right_key = false;
+    if (leftKey && rightKey) {
+      leftKey = rightKey = false;
     }
-    else if(left_key) {
+    else if(leftKey) {
       facing = FlxObject.LEFT;
       velocity.x = -runVelocity;
     }
-    else if(right_key) {
+    else if(rightKey) {
       facing = FlxObject.RIGHT;
       velocity.x = runVelocity;
     }
@@ -152,7 +152,14 @@ class Player extends FlxSprite
       flipY = false;
     }
 
-    jumpKeyPrev = jump_key;
+    jumpKeyPrev = jumpKey;
+  }
+
+  public function die():Void
+  {
+    x = 60;
+    y = 200;
+    PlayState.theLight.flash();
   }
 
 }
