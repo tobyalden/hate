@@ -13,15 +13,15 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
-import flixel.addons.editors.ogmo.FlxOgmoLoader;
+import flash.system.System;
 
 class PlayState extends FlxState
 {
   public static var level:FlxTilemap;
   public static var theLight:Light;
+  public static var spikes:FlxGroup;
 
 	private var player:Player;
-  private var spikes:FlxGroup;
 
 	override public function create():Void
 	{
@@ -65,33 +65,9 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		collidePlayer();
-    if(FlxG.overlap(player, spikes)) {
-      player.die();
+    if(FlxG.keys.justPressed.ESCAPE) {
+      System.exit(0);
     }
-	}
-
-	private function collidePlayer():Void
-	{
-		if(FlxG.collide(player, level) && player.inAir)
-		{
-			var saveY = player.y;
-			if(player.isFlipped) {
-				player.y = player.y - 1;
-				if(FlxG.collide(player, level)) {
-					player.inAir = false;
-          player.landSfx.play();
-				}
-			}
-			else {
-				player.y = player.y + 1;
-				if(FlxG.collide(player, level)) {
-					player.inAir = false;
-          player.landSfx.play();
-				}
-			}
-			player.y = saveY;
-		}
 	}
 
 	override public function destroy():Void

@@ -52,8 +52,9 @@ class Player extends FlxSprite
 
   override public function update():Void
   {
-    movement();
     super.update();
+    collide();
+    movement();
   }
 
   private function movement():Void
@@ -153,6 +154,33 @@ class Player extends FlxSprite
     }
 
     jumpKeyPrev = jumpKey;
+  }
+
+  private function collide():Void
+  {
+    if(FlxG.collide(this, PlayState.level) && inAir)
+		{
+			var saveY = y;
+			if(isFlipped) {
+				y = y - 1;
+				if(FlxG.overlap(this, PlayState.level)) {
+					inAir = false;
+          landSfx.play();
+				}
+			}
+			else {
+				y = y + 1;
+				if(FlxG.overlap(this, PlayState.level)) {
+					inAir = false;
+          landSfx.play();
+				}
+			}
+			y = saveY;
+		}
+
+    if(FlxG.overlap(this, PlayState.spikes)) {
+      die();
+    }
   }
 
   public function die():Void
