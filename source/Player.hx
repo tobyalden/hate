@@ -9,24 +9,23 @@ import openfl.Assets;
 
 class Player extends FlxSprite
 {
-
-  public var land_sfx:FlxSound;
-  private var run_sfx:FlxSound;
-  private var jump_sfx:FlxSound;
-  private var flip_sfx:FlxSound;
-  private var cant_flip_sfx:FlxSound;
+  public var landSfx:FlxSound;
+  private var runSfx:FlxSound;
+  private var jumpSfx:FlxSound;
+  private var flipSfx:FlxSound;
+  private var cantFlipSfx:FlxSound;
 
   private var gravity:Float = 0.00067 * 1000 * 1000;
-  private var terminal_velocity:Float = 0.28 * 1000;
-  private var run_velocity:Float = 0.17 * 1000;
-  private var jump_velocity:Float = 0.29 * 1000;
-  private var jump_cancel_velocity:Float = 0.08 * 1000;
+  private var terminalVelocity:Float = 0.28 * 1000;
+  private var runVelocity:Float = 0.17 * 1000;
+  private var jumpVelocity:Float = 0.29 * 1000;
+  private var jumpCancelVelocity:Float = 0.08 * 1000;
 
-  public var in_air:Bool;
-  public var is_flipped:Bool;
+  public var inAir:Bool;
+  public var isFlipped:Bool;
 
-  private var jump_key_prev:Bool;
-  private var can_flip:Bool;
+  private var jumpKeyPrev:Bool;
+  private var canFlip:Bool;
 
   public function new(X:Float=0, Y:Float=0)
   {
@@ -38,17 +37,17 @@ class Player extends FlxSprite
     animation.add("idle", [0], 10, false);
     animation.add("jump", [4], 10, false);
 
-    run_sfx = FlxG.sound.load("assets/sounds/run1.wav");
-    jump_sfx = FlxG.sound.load("assets/sounds/jump.wav");
-    land_sfx = FlxG.sound.load("assets/sounds/drop3.wav");
-    flip_sfx = FlxG.sound.load("assets/sounds/whoosh.wav");
-    cant_flip_sfx = FlxG.sound.load("assets/sounds/no.wav");
+    runSfx = FlxG.sound.load("assets/sounds/run1.wav");
+    jumpSfx = FlxG.sound.load("assets/sounds/jump.wav");
+    landSfx = FlxG.sound.load("assets/sounds/drop3.wav");
+    flipSfx = FlxG.sound.load("assets/sounds/whoosh.wav");
+    cantFlipSfx = FlxG.sound.load("assets/sounds/no.wav");
 
     setSize(10, 24);
     offset.set(3, 0);
-    jump_key_prev = false;
-    can_flip = true;
-    in_air = true;
+    jumpKeyPrev = false;
+    canFlip = true;
+    inAir = true;
   }
 
   override public function update():Void
@@ -67,48 +66,48 @@ class Player extends FlxSprite
     var flip_key_just:Bool = FlxG.keys.justPressed.X;
 
     if(velocity.y != 0) {
-      in_air = true;
+      inAir = true;
     }
 
-    if(!in_air) {
-      can_flip = true;
+    if(!inAir) {
+      canFlip = true;
     }
 
-    if(jump_key_just && !in_air) {
-      if(is_flipped) {
-        velocity.y = jump_velocity;
+    if(jump_key_just && !inAir) {
+      if(isFlipped) {
+        velocity.y = jumpVelocity;
       }
       else {
-      	velocity.y = -jump_velocity;
+      	velocity.y = -jumpVelocity;
       }
-      jump_sfx.play();
+      jumpSfx.play();
     }
-    else if(jump_key_prev && !jump_key) {
-      if(is_flipped && velocity.y > jump_cancel_velocity) {
-        velocity.y = jump_cancel_velocity;
+    else if(jumpKeyPrev && !jump_key) {
+      if(isFlipped && velocity.y > jumpCancelVelocity) {
+        velocity.y = jumpCancelVelocity;
       }
-      else if (!is_flipped && velocity.y < -jump_cancel_velocity)
+      else if (!isFlipped && velocity.y < -jumpCancelVelocity)
 			{
-				velocity.y = -jump_cancel_velocity;
+				velocity.y = -jumpCancelVelocity;
 			}
     }
 
     if(flip_key_just) {
-      if(can_flip) {
-        is_flipped = !is_flipped;
-        can_flip = false;
-        flip_sfx.play();
+      if(canFlip) {
+        isFlipped = !isFlipped;
+        canFlip = false;
+        flipSfx.play();
       }
       else {
-        cant_flip_sfx.play();
+        cantFlipSfx.play();
       }
     }
 
-    if(!is_flipped && velocity.y > terminal_velocity) {
-      velocity.y = terminal_velocity;
+    if(!isFlipped && velocity.y > terminalVelocity) {
+      velocity.y = terminalVelocity;
     }
-    else if(is_flipped && velocity.y < -terminal_velocity) {
-      velocity.y = -terminal_velocity;
+    else if(isFlipped && velocity.y < -terminalVelocity) {
+      velocity.y = -terminalVelocity;
     }
 
     if (left_key && right_key) {
@@ -116,44 +115,44 @@ class Player extends FlxSprite
     }
     else if(left_key) {
       facing = FlxObject.LEFT;
-      velocity.x = -run_velocity;
+      velocity.x = -runVelocity;
     }
     else if(right_key) {
       facing = FlxObject.RIGHT;
-      velocity.x = run_velocity;
+      velocity.x = runVelocity;
     }
     else {
       velocity.x = 0;
     }
 
-    if(is_flipped) {
+    if(isFlipped) {
       acceleration.y = -gravity;
     }
     else {
       acceleration.y = gravity;
     }
 
-    if(in_air) {
+    if(inAir) {
       animation.play("jump");
-      run_sfx.stop();
+      runSfx.stop();
     }
     else if(velocity.x != 0) {
       animation.play("run");
-      run_sfx.play();
+      runSfx.play();
     }
     else {
       animation.play("idle");
-      run_sfx.stop();
+      runSfx.stop();
     }
 
-    if(is_flipped) {
+    if(isFlipped) {
       flipY = true;
     }
     else {
       flipY = false;
     }
 
-    jump_key_prev = jump_key;
+    jumpKeyPrev = jump_key;
   }
 
 }
