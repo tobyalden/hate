@@ -1,8 +1,6 @@
 package;
 
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
+import flixel.*;
 import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import openfl.Assets;
