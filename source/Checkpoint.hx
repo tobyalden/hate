@@ -16,9 +16,10 @@ class Checkpoint extends FlxSprite
     super.update();
 
     if(FlxG.overlap(this, PlayState.player) && PlayState.player.isInteracting) {
+      PlayState.lastCheckpoint = this;
       animation.play("flash", true);
-      PlayState.player.isInteracting = false;
       Light.flashSfx.play(true);
+      PlayState.player.isInteracting = false;
       trace("Game saved.");
     }
     else if(animation.finished) {

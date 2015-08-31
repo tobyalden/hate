@@ -7,6 +7,8 @@ import openfl.Assets;
 
 class Player extends FlxSprite
 {
+  public static inline var RESPAWN_TIME:Float = 0.8;
+
   public var landSfx:FlxSound;
   private var runSfx:FlxSound;
   private var jumpSfx:FlxSound;
@@ -22,6 +24,9 @@ class Player extends FlxSprite
   public var inAir:Bool;
   public var isFlipped:Bool;
   public var isInteracting:Bool;
+
+  public var isRespawning:Bool;
+  public var respawnTimer:Float;
 
   private var jumpKeyPrev:Bool;
   private var canFlip:Bool;
@@ -48,13 +53,23 @@ class Player extends FlxSprite
     canFlip = true;
     inAir = true;
     isInteracting = false;
+    isRespawning = false;
+    respawnTimer = 0;
   }
 
   override public function update():Void
   {
     super.update();
     collide();
-    movement();
+    if(isRespawning) {
+      respawnTimer -= FlxG.elapsed;
+      if(respawnTimer <= 0) {
+        isRespawning = false;
+      }
+    }
+    else {
+      movement();
+    }
   }
 
   private function movement():Void
@@ -192,9 +207,18 @@ class Player extends FlxSprite
 
   public function die():Void
   {
-    x = 60;
-    y = 200;
+    isRespawning = true;
+    respawnTimer = RESPAWN_TIME;
+    x = PlayState.lastCheckpoint.x + offset.x;
+    y = PlayState.lastCheckpoint.y - (height - PlayState.lastCheckpoint.height);
     PlayState.theLight.flash();
+    animation.play("idle");
+    inAir = false;
+    runSfx.stop();
+    velocity.x = 0;
+    velocity.y = 0;
+    acceleration.x = 0;
+    acceleration.y = 0;
   }
 
 }

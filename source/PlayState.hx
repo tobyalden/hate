@@ -17,6 +17,7 @@ class PlayState extends FlxState
   public static var spikes:FlxGroup;
   public static var theLight:Light;
 	public static var player:Player;
+  public static var lastCheckpoint:Checkpoint;
 
 	override public function create():Void
 	{
