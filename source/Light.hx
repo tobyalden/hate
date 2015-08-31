@@ -9,9 +9,8 @@ import flixel.system.FlxSound;
 class Light extends FlxSprite
 {
   public static inline var FLASH_TIME:Float = 0.8;
+  public static var flashSfx:FlxSound;
   private var flashTimer:Float;
-
-  private var flashSfx:FlxSound;
 
   public function new():Void
   {

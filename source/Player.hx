@@ -21,6 +21,7 @@ class Player extends FlxSprite
 
   public var inAir:Bool;
   public var isFlipped:Bool;
+  public var isInteracting:Bool;
 
   private var jumpKeyPrev:Bool;
   private var canFlip:Bool;
@@ -46,6 +47,7 @@ class Player extends FlxSprite
     jumpKeyPrev = false;
     canFlip = true;
     inAir = true;
+    isInteracting = false;
   }
 
   override public function update():Void
@@ -60,6 +62,9 @@ class Player extends FlxSprite
     var delta = FlxG.elapsed * 1000;
     var leftKey:Bool = FlxG.keys.anyPressed(["LEFT"]);
     var rightKey:Bool = FlxG.keys.anyPressed(["RIGHT"]);
+    // maybe if downKey && downKeyJust set isInteracting = true?
+    var downKey:Bool = FlxG.keys.anyPressed(["DOWN"]);
+    var downKeyJust:Bool = FlxG.keys.justPressed.DOWN;
     var jumpKey:Bool = FlxG.keys.anyPressed(["SPACE", "Z"]);
     var jumpKeyJust:Bool = FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.Z;
     var flipKeyJust:Bool = FlxG.keys.justPressed.X;
@@ -70,6 +75,10 @@ class Player extends FlxSprite
 
     if(!inAir) {
       canFlip = true;
+    }
+
+    if(downKey && downKeyJust) {
+      isInteracting = true;
     }
 
     if(jumpKeyJust && !inAir) {

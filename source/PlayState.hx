@@ -16,7 +16,7 @@ class PlayState extends FlxState
   public static var level:FlxTilemap;
   public static var spikes:FlxGroup;
   public static var theLight:Light;
-	private var player:Player;
+	public static var player:Player;
 
 	override public function create():Void
 	{
