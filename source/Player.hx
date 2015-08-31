@@ -7,7 +7,7 @@ import openfl.Assets;
 
 class Player extends FlxSprite
 {
-  public static inline var RESPAWN_TIME:Float = 0.8;
+  public static inline var RESPAWN_TIME:Float = 320 / 1000;
 
   public var landSfx:FlxSound;
   private var runSfx:FlxSound;
