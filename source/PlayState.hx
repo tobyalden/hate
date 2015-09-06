@@ -36,17 +36,25 @@ class PlayState extends FlxState
 
     spikes = new FlxGroup();
 
-    for(rightSpike in level.getTileCoords(4, false)) {
-      spikes.add(new FlxObject(rightSpike.x + TILE_SIZE/2, rightSpike.y, TILE_SIZE/2, TILE_SIZE));
+    if(level.getTileCoords(4, false) != null) {
+      for(rightSpike in level.getTileCoords(4, false)) {
+        spikes.add(new FlxObject(rightSpike.x + TILE_SIZE/2, rightSpike.y, TILE_SIZE/2, TILE_SIZE));
+      }
     }
-    for(floorSpike in level.getTileCoords(5, false)) {
-      spikes.add(new FlxObject(floorSpike.x, floorSpike.y + TILE_SIZE/2, TILE_SIZE, TILE_SIZE/2));
+    if(level.getTileCoords(5, false) != null) {
+      for(floorSpike in level.getTileCoords(5, false)) {
+        spikes.add(new FlxObject(floorSpike.x, floorSpike.y + TILE_SIZE/2, TILE_SIZE, TILE_SIZE/2));
+      }
     }
-    for(leftSpike in level.getTileCoords(6, false)) {
-      spikes.add(new FlxObject(leftSpike.x, leftSpike.y, TILE_SIZE/2, TILE_SIZE));
+    if(level.getTileCoords(6, false) != null) {
+      for(leftSpike in level.getTileCoords(6, false)) {
+        spikes.add(new FlxObject(leftSpike.x, leftSpike.y, TILE_SIZE/2, TILE_SIZE));
+      }
     }
-    for(ceilSpike in level.getTileCoords(7, false)) {
-      spikes.add(new FlxObject(ceilSpike.x, ceilSpike.y, TILE_SIZE, TILE_SIZE/2));
+    if(level.getTileCoords(7, false) != null) {
+      for(ceilSpike in level.getTileCoords(7, false)) {
+        spikes.add(new FlxObject(ceilSpike.x, ceilSpike.y, TILE_SIZE, TILE_SIZE/2));
+      }
     }
 
     add(level);
@@ -54,9 +62,11 @@ class PlayState extends FlxState
 		player = new Player(60, 200);
 		add(player);
 
-    for(checkpoint in level.getTileCoords(8, false)) {
-      level.setTile(Math.round(checkpoint.x/TILE_SIZE), Math.round(checkpoint.y/TILE_SIZE), 2);
-      add(new Checkpoint(checkpoint.x, checkpoint.y));
+    if(level.getTileCoords(8, false) != null) {      
+      for(checkpoint in level.getTileCoords(8, false)) {
+        level.setTile(Math.round(checkpoint.x/TILE_SIZE), Math.round(checkpoint.y/TILE_SIZE), 2);
+        add(new Checkpoint(checkpoint.x, checkpoint.y));
+      }
     }
 
     theLight = new Light();
