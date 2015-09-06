@@ -40,7 +40,7 @@
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
 </data>
  </layer>
- <objectgroup name="movingplatforms">
+ <objectgroup name="platforms">
   <object id="4" x="80" y="96" width="48" height="48"/>
   <object id="9" x="80" y="96">
    <polyline points="0,0 400,0 0,0"/>

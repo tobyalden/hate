@@ -185,6 +185,7 @@ class Player extends FlxSprite
   private function collide():Void
   {
     FlxG.collide(this, PlayState.level);
+    FlxG.collide(this, PlayState.platforms);
     var feetCollider:FlxObject;
     if(isFlipped) {
       feetCollider = new FlxObject(x, y - 1, width, 1);
@@ -192,7 +193,7 @@ class Player extends FlxSprite
     else {
       feetCollider = new FlxObject(x, y + height, width, 1);
     }
-    if(PlayState.level.overlaps(feetCollider)) {
+    if(PlayState.level.overlaps(feetCollider) || FlxG.overlap(feetCollider, PlayState.platforms)) {
       if(inAir == true) {
         landSfx.play();
       }
@@ -216,8 +217,9 @@ class Player extends FlxSprite
     else {
       y = PlayState.lastCheckpoint.y - (height - PlayState.lastCheckpoint.height);
     }
-    PlayState.theLight.flash();
+    flipY = isFlipped;
     animation.play("idle");
+    PlayState.theLight.flash();
     inAir = false;
     runSfx.stop();
     velocity.x = 0;

@@ -18,6 +18,7 @@ class PlayState extends FlxState
 
   public static var level:FlxTilemap;
   public static var spikes:FlxGroup;
+  public static var platforms:FlxGroup;
   public static var theLight:Light;
 	public static var player:Player;
   public static var lastCheckpoint:Checkpoint;
@@ -35,6 +36,7 @@ class PlayState extends FlxState
     level.setTileProperties(4, FlxObject.NONE, 6);
 
     spikes = new FlxGroup();
+    platforms = new FlxGroup();
 
     if(level.getTileCoords(4, false) != null) {
       for(rightSpike in level.getTileCoords(4, false)) {
@@ -80,6 +82,25 @@ class PlayState extends FlxState
     add(theLight);
 
     /*FlxG.sound.playMusic("assets/music/nature.ogg", 1, true);*/
+
+    // Load platforms & waypoints
+
+    if(tmx.getObjectGroup('platforms') != null) {
+      for(platformObject in tmx.getObjectGroup('platforms').objects) {
+        if(platformObject.objectType == TiledObject.RECTANGLE) {
+          var platform = new Platform(platformObject.x, platformObject.y, platformObject.width, platformObject.height);
+          for(waypointObject in tmx.getObjectGroup('platforms').objects) {
+            if(waypointObject.objectType == TiledObject.POLYLINE) {
+              if(waypointObject.x == platform.x && waypointObject.y == platform.y) {
+                platform.setPoints(waypointObject.points);
+              }
+            }
+          }
+          platforms.add(platform);
+        }
+      }
+    }
+    add(platforms);
 
 		super.create();
 	}
