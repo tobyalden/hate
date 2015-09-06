@@ -81,7 +81,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
 		Font.registerFont (__ASSET__assets_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__assets_fonts_arial_ttf);
 		
@@ -89,7 +88,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -599,8 +597,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		path.set ("assets/data/map.csv", "assets/data/map.csv");
-		type.set ("assets/data/map.csv", AssetType.TEXT);
 		path.set ("assets/data/project.tmx", "assets/data/project.tmx");
 		type.set ("assets/data/project.tmx", AssetType.TEXT);
 		path.set ("assets/images/checkpoint.png", "assets/images/checkpoint.png");
@@ -660,9 +656,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
-		id = "assets/data/map.csv";
-		path.set (id, id);
-		type.set (id, AssetType.TEXT);
 		id = "assets/data/project.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
@@ -784,7 +777,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__assets_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__assets_fonts_arial_ttf);
 		
@@ -793,7 +785,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1545,13 +1536,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
-
 @:keep @:bind #if display private #end class __ASSET__assets_fonts_nokiafc22_ttf extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_fonts_arial_ttf extends null { }
 
 
 #elseif html5
-
 
 
 

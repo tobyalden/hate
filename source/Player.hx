@@ -180,26 +180,20 @@ class Player extends FlxSprite
 
   private function collide():Void
   {
-    if(FlxG.collide(this, PlayState.level) && inAir)
-		{
-			var saveY = y;
-			if(isFlipped) {
-				y = y - 1;
-				if(FlxG.overlap(this, PlayState.level)) {
-					inAir = false;
-          landSfx.play();
-				}
-			}
-			else {
-				y = y + 1;
-				if(FlxG.overlap(this, PlayState.level)) {
-					inAir = false;
-          landSfx.play();
-				}
-			}
-			y = saveY;
-		}
-
+    FlxG.collide(this, PlayState.level);
+    var feetCollider:FlxObject;
+    if(isFlipped) {
+      feetCollider = new FlxObject(x, y - 1, width, 1);
+    }
+    else {
+      feetCollider = new FlxObject(x, y + height, width, 1);
+    }
+    if(PlayState.level.overlaps(feetCollider)) {
+      if(inAir == true) {
+        landSfx.play();
+      }
+      inAir = false;
+    }
     if(FlxG.overlap(this, PlayState.spikes)) {
       die();
     }
