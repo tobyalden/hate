@@ -96,6 +96,10 @@ class Player extends FlxSprite
       isInteracting = true;
     }
 
+    if(!downKey) {
+      isInteracting = false;
+    }
+
     if(jumpKeyJust && !inAir) {
       if(isFlipped) {
         velocity.y = jumpVelocity;
@@ -204,7 +208,14 @@ class Player extends FlxSprite
     isRespawning = true;
     respawnTimer = RESPAWN_TIME;
     x = PlayState.lastCheckpoint.x + offset.x;
-    y = PlayState.lastCheckpoint.y - (height - PlayState.lastCheckpoint.height);
+    isFlipped = PlayState.lastCheckpoint.isFlipped;
+    if(isFlipped) {
+      y = PlayState.lastCheckpoint.y;
+      trace(PlayState.lastCheckpoint.y);
+    }
+    else {
+      y = PlayState.lastCheckpoint.y - (height - PlayState.lastCheckpoint.height);
+    }
     PlayState.theLight.flash();
     animation.play("idle");
     inAir = false;

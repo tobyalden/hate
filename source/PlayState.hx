@@ -62,10 +62,17 @@ class PlayState extends FlxState
 		player = new Player(60, 200);
 		add(player);
 
-    if(level.getTileCoords(8, false) != null) {      
+    if(level.getTileCoords(8, false) != null) {
       for(checkpoint in level.getTileCoords(8, false)) {
         level.setTile(Math.round(checkpoint.x/TILE_SIZE), Math.round(checkpoint.y/TILE_SIZE), 2);
         add(new Checkpoint(checkpoint.x, checkpoint.y));
+      }
+    }
+
+    if(level.getTileCoords(9, false) != null) {
+      for(checkpoint in level.getTileCoords(9, false)) {
+        level.setTile(Math.round(checkpoint.x/TILE_SIZE), Math.round(checkpoint.y/TILE_SIZE), 2);
+        add(new Checkpoint(checkpoint.x, checkpoint.y, true));
       }
     }
 

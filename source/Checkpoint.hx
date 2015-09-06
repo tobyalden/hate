@@ -3,9 +3,14 @@ import flixel.*;
 
 class Checkpoint extends FlxSprite
 {
-  public function new(X:Float=0, Y:Float=0)
+
+  public var isFlipped:Bool;
+
+  public function new(X:Float=0, Y:Float=0, isFlipped:Bool=false)
   {
     super(X, Y);
+    this.isFlipped = isFlipped;
+    flipY = isFlipped;
     loadGraphic(AssetPaths.checkpoint__png, true, 16, 16);
     animation.add("idle", [0, 1, 2, 3, 2, 1], 10, false);
     animation.add("flash", [4, 5, 6], 13, false);

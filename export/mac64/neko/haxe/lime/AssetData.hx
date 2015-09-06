@@ -20,8 +20,6 @@ class AssetData {
 			type.set ("assets/data/project.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/checkpoint.png", "assets/images/checkpoint.png");
 			type.set ("assets/images/checkpoint.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/objects.png", "assets/images/objects.png");
-			type.set ("assets/images/objects.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/player.png", "assets/images/player.png");
 			type.set ("assets/images/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/tiles.png", "assets/images/tiles.png");
